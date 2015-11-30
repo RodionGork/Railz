@@ -1,5 +1,7 @@
+var dataSource = './data.json';
+
 var dim = {
-    n: 10,
+    n: 1, // overriden from data
     step: 1.0,
     ws: 4.0,
     wr: 2.4,
@@ -9,7 +11,7 @@ var dim = {
 };
 
 function addSleepers(scene) {
-    var m = new THREE.MeshLambertMaterial({color:0xA07000});
+    var m = new THREE.MeshLambertMaterial({color:0x704000});
     w0 = dim.wr - 4 * dim.wd;
     w1 = (dim.ws - w0 - 8 * dim.wd) / 2;
     var g = new THREE.BoxGeometry(dim.sWidth, dim.h, w0);
@@ -20,18 +22,18 @@ function addSleepers(scene) {
         var x = (i - (dim.n - 1) / 2) * dim.step;
         o.position.x = x;
         scene.add(o);
-        addSleeperSide(scene, x, 1, gd, ge, m, w0, w1);
-        addSleeperSide(scene, x, -1, gd, ge, m, w0, w1);
+        addSleeperSide(scene, x, -1, gd, ge, m, w0, w1, data.values[i].slice(0, 4).reverse());
+        addSleeperSide(scene, x, 1, gd, ge, m, w0, w1, data.values[i].slice(4));
     }
 }
 
-function addSleeperSide(scene, x, f, gd, ge, m, w0, w1) {
+function addSleeperSide(scene, x, f, gd, ge, m, w0, w1, values) {
     var o = new THREE.Mesh(ge, m);
     o.position.x = x;
     o.position.z = f * ((w0 + w1) / 2 + dim.wd * 4);
     scene.add(o);
-    var md = new THREE.MeshLambertMaterial({color:0x00FF00});
     for (var j = 0; j < 4; j++) {
+        var md = colors[Math.round(values[j] * 100)];
         var od = new THREE.Mesh(gd, md);
         od.position.x = x;
         od.position.z = f * (w0 / 2 + dim.wd * (j + 0.5));
@@ -78,6 +80,21 @@ function addBallast(scene) {
         scene.add(o2);
         scene.add(o3);
     }
+}
+
+var data = $.ajax(dataSource, {async: false, dataType: "json"});
+var data = JSON.parse(data.responseText);
+dim.n = data.values.length;
+var colors = [];
+for (i = 0; i <= 100; i++) {
+    var mi0 = 1 - i / 100.0;
+    var mi1 = i / 100.0;
+    var mcol = new THREE.Color(
+        data.color0[0] * mi0 + data.color1[0] * mi1,
+        data.color0[1] * mi0 + data.color1[1] * mi1,
+        data.color0[2] * mi0 + data.color1[2] * mi1
+    );
+    colors.push(new THREE.MeshLambertMaterial({color: mcol}));
 }
 
 var canvas = $('#myscreen').get(0);
