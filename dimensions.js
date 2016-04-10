@@ -1,7 +1,7 @@
 var sleeperColor = 0x704000;
 var sleeperWidth = 0.240;
 var sleeperStep = 0.625;
-var sleeperShift = 0.05;
+var sleeperShift = 0.01;
 var sleeperProfile = [
     [-1.375, 0],
     [1.375, 0],
@@ -63,7 +63,7 @@ var sandProfile = [
 
 var indicatorWidth = 0.2;
 var indicatorLength = sleeperStep * 0.8;
-var indicatorHeight = 0.05;
-var indicatorShift = 0.025;
+var indicatorHeight = 0.01;
+var indicatorShift = 0.005;
 var indicatorPositions = [1.28, 1.08, 0.68, 0.48, -0.48, -0.68, -1.08, -1.28];
 
