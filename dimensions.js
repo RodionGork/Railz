@@ -64,6 +64,6 @@ var sandProfile = [
 var indicatorWidth = 0.2;
 var indicatorLength = sleeperStep * 0.8;
 var indicatorHeight = 0.05;
-var indicatorShift = 0.0;
-var indicatorPositions = [-1.28, -1.08, -0.68, -0.48, 0.48, 0.68, 1.08, 1.28];
+var indicatorShift = 0.025;
+var indicatorPositions = [1.28, 1.08, 0.68, 0.48, -0.48, -0.68, -1.08, -1.28];
 

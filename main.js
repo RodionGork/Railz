@@ -1,5 +1,3 @@
-var dataSource = './data.json';
-
 function addSleepers(scene) {
     var m = new THREE.MeshLambertMaterial({color: sleeperColor});
     var geom = polyPrismGeometry(sleeperProfile, sleeperWidth);
@@ -60,8 +58,10 @@ function addSand(scene) {
 }
 
 function addIndicators(scene) {
+    window.indicators = [];
     var geom = new THREE.BoxGeometry(indicatorLength, indicatorHeight, indicatorWidth);
     for (var i = 0; i < sections; i++) {
+        var row = [];
         for (var j = 0; j < 8; j++) {
             var x = (i - (sections - 1) / 2) * sleeperStep;
             var m = colors[Math.round(data.values[i][j] * 100)];
@@ -70,12 +70,27 @@ function addIndicators(scene) {
             od.position.z = indicatorPositions[j];
             od.position.y = indicatorShift;
             scene.add(od);
+            row.push(od);
+        }
+        window.indicators.push(row);    
+    }
+}
+
+function loadIndicators() {
+    var data = $.ajax(dataSource, {async: false, dataType: "json"});
+    return data = JSON.parse(data.responseText);
+}
+
+function updateIndicators() {
+    var data = loadIndicators();
+    for (var i = 0; i < sections; i++) {
+        for (var j = 0; j < 8; j++) {
+            indicators[i][j].material = colors[Math.round(data.values[i][j] * 100)];
         }
     }
 }
 
-var data = $.ajax(dataSource, {async: false, dataType: "json"});
-var data = JSON.parse(data.responseText);
+var data = loadIndicators();
 sections = data.values.length;
 var colors = [];
 for (i = 0; i <= 100; i++) {
@@ -126,7 +141,7 @@ function render() {
 	renderer.render(scene, camera);
 }
 
-//$(window).load(function() {
-    render();
-//});
+render();
+
+setInterval(updateIndicators, updateInterval);
 
