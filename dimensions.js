@@ -41,6 +41,7 @@ var railProfile = [
 
 var ballastColor = 0x585450;
 var ballastShift = -0.5;
+var ballastOpacity = 0.7;
 var ballastProfile = [
     [-2.0, 0],
     [2.0, 0],
@@ -63,7 +64,8 @@ var sandProfile = [
 
 var indicatorWidth = 0.2;
 var indicatorLength = sleeperStep * 0.8;
-var indicatorHeight = 0.01;
-var indicatorShift = 0.005;
+var indicatorHeight = 0.5;
+var sandOpacity = 0.75;
+var indicatorShift = -0.245;
 var indicatorPositions = [1.28, 1.08, 0.68, 0.48, -0.48, -0.68, -1.08, -1.28];
 

@@ -32,29 +32,23 @@ function addRails(scene) {
 }
 
 function addBallast(scene) {
-    var m = new THREE.MeshLambertMaterial({color: ballastColor});
-    var geom = polyPrismGeometry(ballastProfile, sleeperStep);
-    for (var i = 0; i < sections; i++) {
-        var prism = new THREE.Mesh(geom, m);
-        var x = (i - (sections - 1) / 2) * sleeperStep;
-        prism.rotation.y = Math.PI / 2;
-        prism.position.x += x - sleeperStep / 2;
-        prism.position.y += ballastShift;
-        scene.add(prism);
-    }
+    var m = new THREE.MeshLambertMaterial({color: ballastColor, transparent: true, opacity: ballastOpacity});
+    var geom = polyPrismGeometry(ballastProfile, sleeperStep * sections);
+    var prism = new THREE.Mesh(geom, m);
+    prism.rotation.y = Math.PI / 2;
+    prism.position.x -= (sleeperStep * sections) / 2;
+    prism.position.y += ballastShift;
+    scene.add(prism);
 }
 
 function addSand(scene) {
-    var m = new THREE.MeshLambertMaterial({color: sandColor});
-    var geom = polyPrismGeometry(sandProfile, sleeperStep);
-    for (var i = 0; i < sections; i++) {
-        var prism = new THREE.Mesh(geom, m);
-        var x = (i - (sections - 1) / 2) * sleeperStep;
-        prism.rotation.y = Math.PI / 2;
-        prism.position.x += x - sleeperStep / 2;
-        prism.position.y += sandShift;
-        scene.add(prism);
-    }
+    var m = new THREE.MeshLambertMaterial({color: sandColor, transparent: true, opacity: sandOpacity});
+    var geom = polyPrismGeometry(sandProfile, sleeperStep * sections);
+    var prism = new THREE.Mesh(geom, m);
+    prism.rotation.y = Math.PI / 2;
+    prism.position.x -= (sleeperStep * sections) / 2;
+    prism.position.y += sandShift;
+    scene.add(prism);
 }
 
 function addIndicators(scene) {
