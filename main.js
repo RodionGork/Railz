@@ -32,7 +32,7 @@ function addRails(scene) {
 }
 
 function addBallast(scene) {
-    var m = new THREE.MeshLambertMaterial({color: ballastColor, transparent: true, opacity: ballastOpacity});
+    var m = new THREE.MeshLambertMaterial({color: ballastColor, transparent: true, opacity: ballastOpacity, side: THREE.DoubleSide});
     var geom = polyPrismGeometry(ballastProfile, sleeperStep * sections);
     var prism = new THREE.Mesh(geom, m);
     prism.rotation.y = Math.PI / 2;
@@ -42,7 +42,7 @@ function addBallast(scene) {
 }
 
 function addSand(scene) {
-    var m = new THREE.MeshLambertMaterial({color: sandColor, transparent: true, opacity: sandOpacity});
+    var m = new THREE.MeshLambertMaterial({color: sandColor, transparent: true, opacity: sandOpacity, side: THREE.DoubleSide});
     var geom = polyPrismGeometry(sandProfile, sleeperStep * sections);
     var prism = new THREE.Mesh(geom, m);
     prism.rotation.y = Math.PI / 2;

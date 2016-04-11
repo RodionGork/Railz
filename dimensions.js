@@ -52,7 +52,8 @@ var ballastProfile = [
 ];
 
 var sandColor = 0xA09060;
-var sandShift = -0.7;
+var sandShift = -0.71;
+var sandOpacity = 0.75;
 var sandProfile = [
     [-2.4, 0],
     [2.4, 0],
@@ -65,7 +66,6 @@ var sandProfile = [
 var indicatorWidth = 0.2;
 var indicatorLength = sleeperStep * 0.8;
 var indicatorHeight = 0.5;
-var sandOpacity = 0.75;
 var indicatorShift = -0.245;
 var indicatorPositions = [1.28, 1.08, 0.68, 0.48, -0.48, -0.68, -1.08, -1.28];
 
