@@ -89,7 +89,8 @@ function updateIndicators() {
         for (var j = 0; j < 8; j++) {
             var ind = indicators[i][j];
             var value = data.values[i][j];
-            var h = (indicatorHeightMax - indicatorHeightMin) * (1 - value) + indicatorHeightMin;
+            var height = data.heights[i][j];
+            var h = (indicatorHeightMax - indicatorHeightMin) * height + indicatorHeightMin;
             var dh = indicatorHeightMax - h;
             ind[0][0].material = colors[Math.round(value * 100)];
             ind[0][0].position.y = ind[0][1] + dh / 2;
