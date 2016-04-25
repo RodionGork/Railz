@@ -53,7 +53,10 @@ function addSand(scene) {
 
 function addIndicators(scene) {
     window.indicators = [];
-    var geom = new THREE.BoxGeometry(indicatorLength, indicatorHeight, indicatorWidth);
+    var geom = new THREE.BoxGeometry(indicatorLength, indicatorHeightMax, indicatorWidth);
+    var geomTip = new THREE.CylinderGeometry(indicatorWidth / Math.sqrt(2), indicatorWidth / Math.sqrt(2) / 3, indicatorHeightTip, 4);
+    geomTip.rotateY(Math.PI / 4);
+    geomTip.scale(indicatorLength / indicatorWidth, 1, 1);
     for (var i = 0; i < sections; i++) {
         var row = [];
         for (var j = 0; j < 8; j++) {
@@ -64,7 +67,12 @@ function addIndicators(scene) {
             od.position.z = indicatorPositions[j];
             od.position.y = indicatorShift;
             scene.add(od);
-            row.push(od);
+            var ot = new THREE.Mesh(geomTip, m);
+            ot.position.x = x;
+            ot.position.z = indicatorPositions[j];
+            ot.position.y = indicatorShift - (indicatorHeightMax + indicatorHeightTip) / 2;
+            scene.add(ot);
+            row.push([[od, od.position.y], [ot, ot.position.y]]);
         }
         window.indicators.push(row);    
     }
@@ -79,7 +87,15 @@ function updateIndicators() {
     var data = loadIndicators();
     for (var i = 0; i < sections; i++) {
         for (var j = 0; j < 8; j++) {
-            indicators[i][j].material = colors[Math.round(data.values[i][j] * 100)];
+            var ind = indicators[i][j];
+            var value = data.values[i][j];
+            var h = (indicatorHeightMax - indicatorHeightMin) * (1 - value) + indicatorHeightMin;
+            var dh = indicatorHeightMax - h;
+            ind[0][0].material = colors[Math.round(value * 100)];
+            ind[0][0].position.y = ind[0][1] + dh / 2;
+            ind[0][0].scale.y = h / indicatorHeightMax;
+            ind[1][0].material = colors[Math.round(value * 100)];
+            ind[1][0].position.y = ind[1][1] + dh;
         }
     }
 }

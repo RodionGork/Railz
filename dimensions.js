@@ -21,7 +21,7 @@ var sleeperProfile = [
 
 var railColor = 0x909090;
 var railDistance = 1.760;
-var railShift = 0.250;
+var railShift = 0.21;
 var railProfile = [
     [-0.075, 0],
     [0.075, 0],
@@ -41,7 +41,7 @@ var railProfile = [
 
 var ballastColor = 0x585450;
 var ballastShift = -0.5;
-var ballastOpacity = 0.7;
+var ballastOpacity = 0.5;
 var ballastProfile = [
     [-2.0, 0],
     [2.0, 0],
@@ -53,7 +53,7 @@ var ballastProfile = [
 
 var sandColor = 0xA09060;
 var sandShift = -0.71;
-var sandOpacity = 0.75;
+var sandOpacity = 0.4;
 var sandProfile = [
     [-2.4, 0],
     [2.4, 0],
@@ -65,7 +65,8 @@ var sandProfile = [
 
 var indicatorWidth = 0.2;
 var indicatorLength = sleeperStep * 0.8;
-var indicatorHeight = 0.5;
-var indicatorShift = -0.245;
+var indicatorHeightTip = 0.15;
+var indicatorHeightMax = 0.35;
+var indicatorHeightMin = 0.1;
+var indicatorShift = -0.14;
 var indicatorPositions = [1.28, 1.08, 0.68, 0.48, -0.48, -0.68, -1.08, -1.28];
-
