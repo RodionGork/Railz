@@ -85,6 +85,9 @@ function loadIndicators() {
 
 function updateIndicators() {
     var data = loadIndicators();
+    if (typeof(data.heights) == 'undefined') {
+        data.heights = data.values;
+    }
     for (var i = 0; i < sections; i++) {
         for (var j = 0; j < 8; j++) {
             var ind = indicators[i][j];
